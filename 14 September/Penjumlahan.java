@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class Penjumlahan {
-    public static void main(String[] arrgs) {
+    public static void main(String[] args) {
         int x;
         int y;
         Scanner scan = new Scanner(System.in);
