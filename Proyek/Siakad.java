@@ -44,22 +44,27 @@ public class Siakad {
         switch (algo) {
             case 1: {
                 exchangeSort();
+                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
             case 2: {
                 selectionSort();
+                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
             case 3: {
                 bubbleSort();
+                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
             case 4:{
                 quickSort(mahasiswa, 0, jumlahData-1);
+                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
             case 5:{
                 shellSort();
+                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
         }
@@ -175,7 +180,7 @@ public class Siakad {
         System.out.println("===Edit Data===");
         System.out.println("Cari NIM dari data yang akan diubah : ");
         long edit = scan.nextLong();
-        System.out.println("\n=============");
+        System.out.println("===============");
 
         for(int i=0; i<jumlahData; i++) {
             if(mahasiswa[i].getNim()==edit) {
@@ -212,8 +217,10 @@ public class Siakad {
 
     public static void hapusData() {
         Scanner scan = new Scanner(System.in);
+        System.out.println("===Hapus Data===");
         System.out.print("Cari NIM dari data yang akan dihapus : ");
         long delete = scan.nextLong();
+        System.out.println("===============");
 
         for(int i=0; i<jumlahData; i++) {
             if(mahasiswa[i].getNim()==delete) {
@@ -222,13 +229,34 @@ public class Siakad {
                 mahasiswa[i] = mahasiswa[i +1];
                 }
             }
-            jumlahData--;
-
-            System.out.println("Data Terhapus!");
+        jumlahData--;
+        System.out.println("Data Terhapus!");
     }
 
     public static void UAS() {
-
+        if (jumlahData==0) {
+            System.out.println("Tidak ada data");
+        } else {
+            int jarak = jumlahData;
+            int susut = 13;
+            int urut = 0;
+            while(urut == 0) {
+                jarak = (jarak*10) / susut;
+                if(jarak <= 1) {
+                    jarak = 1;
+                    urut = 1;
+                }
+                for(int i=0; (i+jarak)<jumlahData; i++) {
+                    if(mahasiswa[i].getNim() > mahasiswa[i+jarak].getNim()) {
+                        Mahasiswa temp = mahasiswa[i];
+                        mahasiswa[i] = mahasiswa[i+jarak];
+                        mahasiswa[i+jarak] = temp;
+                        urut = 0;
+                    }
+                }
+            }
+            System.out.println("Data telah diurutkan. Silahkan tampilkan data");  
+        }
     }
     public static void main(String[] args) {
         int menu;
@@ -258,7 +286,7 @@ public class Siakad {
                 editData();
             } else if (menu==6) {
                 hapusData();
-            } else if (menu==8) {
+            } else if (menu==7) {
                 UAS();
             }
         } while (menu!=8);
