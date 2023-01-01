@@ -7,7 +7,7 @@ public class Siakad {
 
     public static void tambahData() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("===Tambah Data===");
+        System.out.println("\n===Tambah Data===");
         System.out.println("Silahkan tambah data");
         System.out.print("Masukkan NIM = ");
         long nim = scan.nextLong();
@@ -18,22 +18,24 @@ public class Siakad {
         mahasiswa[jumlahData].setNim(nim);
         mahasiswa[jumlahData].setNama(nama);
         jumlahData = jumlahData + 1;
+        System.out.println("==================\n");
     }
 
     public static void tampilData() {
-        System.out.println("===Data Mahasiswa===");
+        System.out.println("\n===Data Mahasiswa===");
         System.out.println("NIM" + "\t| " + "NAMA");
-        System.out.println("--------------------");
+        System.out.println("--------------------------------");
         int i = 0;
         while (i<jumlahData) {
             System.out.println(mahasiswa[i].getNim()+"\t| "+mahasiswa[i].getNama());
             i++;
         }
+        System.out.println("--------------------------------\n");
     }
 
     public static void urutkanData() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("===Algoritma Pengurutan===");
+        System.out.println("\n===Algoritma Pengurutan===");
         System.out.println("1. EXCHANGE SORT");
         System.out.println("2. SELECTION SORT");
         System.out.println("3. BUBBLE SORT");
@@ -44,30 +46,26 @@ public class Siakad {
         switch (algo) {
             case 1: {
                 exchangeSort();
-                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
             case 2: {
                 selectionSort();
-                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
             case 3: {
                 bubbleSort();
-                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
             case 4:{
                 quickSort(mahasiswa, 0, jumlahData-1);
-                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
             case 5:{
                 shellSort();
-                System.out.println("Data telah diurutkan. Silahkan tampilkan data");
                 break;
             }
         }
+        System.out.println("Data telah diurutkan. Silahkan tampilkan data\n");
     }
 
     //EXCHANGE SORT
@@ -152,7 +150,7 @@ public class Siakad {
     public static void cariData() {
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("===Cari Data===");
+        System.out.println("\n===Cari Data===");
         System.out.println("1. LINEAR SEARCH");
         System.out.println("2. BINARY SEARCH");
         System.out.print("Pilih :");
@@ -165,6 +163,7 @@ public class Siakad {
                 break;
             }
             case 2:{
+                binarySearch();
                 break;
             }
         }
@@ -172,15 +171,51 @@ public class Siakad {
 
     public static void linearSearch() {
         Scanner scan = new Scanner(System.in);
+        System.out.println("---Linear Search---");
+        System.out.print("Masukkan NIM : ");
+        long linear = scan.nextLong();
+        
+        for(int i = 0; i < jumlahData; i++) {
+            if(mahasiswa[i].getNim()==linear) {
+                System.out.println("\n--------------------------------");
+                System.out.println("Data ditemukan pada indeks ke-" + (i+1));
+                System.out.println("NIM : " +mahasiswa[i].getNim());
+                System.out.println("Nama : "+mahasiswa[i].getNama());
+                System.out.println("--------------------------------\n");
+            }
+        }
+    }
 
+    public static void binarySearch() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("---Binary Search---");
+        System.out.print("Masukkan NIM : ");
+        long binary = scan.nextLong();
+
+        int l = 0, r = jumlahData-1;
+        while(l <= r) {
+            int m = l + (r - l) / 2;
+            if(mahasiswa[m].getNim()==binary) {
+                System.out.println("\n--------------------------------");
+                System.out.println("Data ditemukan pada indeks ke-" + (m+1));
+                System.out.println("NIM : " +mahasiswa[m].getNim());
+                System.out.println("Nama : "+mahasiswa[m].getNama());
+                System.out.println("--------------------------------\n");
+            }
+
+            if(mahasiswa[m].getNim() < binary) {
+                l = m + 1;
+            } else {
+                r = m - 1;
+            }
+        }
     }
 
     public static void editData() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("===Edit Data===");
+        System.out.println("\n===Edit Data===");
         System.out.println("Cari NIM dari data yang akan diubah : ");
         long edit = scan.nextLong();
-        System.out.println("===============");
 
         for(int i=0; i<jumlahData; i++) {
             if(mahasiswa[i].getNim()==edit) {
@@ -192,35 +227,37 @@ public class Siakad {
 
                 switch (menuEdit) {
                     case 1 :{
+                        System.out.println("\n--------------------------------");
                         System.out.print("NIM baru : ");
                         long nimEdit = scan.nextLong();
                         scan.nextLine();
 
                         mahasiswa[i].setNim(nimEdit);
                         System.out.println("Data NIM berhasil dirubah");
+                        System.out.println("--------------------------------\n");
                         break;
                     }
                     case 2:{
+                        System.out.println("\n--------------------------------");
                         System.out.print("Nama baru : ");
                         String namaEdit = scan.next();
                         scan.nextLine();
                         mahasiswa[i].setNama(namaEdit);
                         System.out.println("Data Nama berhasil dirubah");
+                        System.out.println("--------------------------------\n");
                         break;
                     }
                 }
-            } else {
-                System.out.println("Data tidak ditemukan");
-            }
+            } 
         }
     }
 
     public static void hapusData() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("===Hapus Data===");
+        System.out.println("\n===Hapus Data===");
         System.out.print("Cari NIM dari data yang akan dihapus : ");
         long delete = scan.nextLong();
-        System.out.println("===============");
+        System.out.println("===============\n");
 
         for(int i=0; i<jumlahData; i++) {
             if(mahasiswa[i].getNim()==delete) {
@@ -231,6 +268,7 @@ public class Siakad {
             }
         jumlahData--;
         System.out.println("Data Terhapus!");
+        System.out.println("==================\n");
     }
 
     public static void UAS() {
